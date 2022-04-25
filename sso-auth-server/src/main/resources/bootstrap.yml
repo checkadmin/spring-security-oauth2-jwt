@@ -1,0 +1,29 @@
+# 应用名称
+server:
+  port: 8080
+  servlet:
+    session:
+      # 分钟，不配置默认30分钟
+      timeout: 15
+spring:
+  application:
+    name: sso-auth-server
+  redis:
+    host: 192.168.31.10
+    password: root
+    port: 6379
+    #按照业务类型分库，不要都冗余到一起
+    database: 0
+  cloud:
+    nacos:
+      discovery:
+        #server-addr: 192.168.10.4:8848
+        server-addr: 192.168.31.10:8848
+        namespace: public
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/sso-user?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=true&serverTimezone=GMT
+      username: root
+      password: root
+      db-type: com.alibaba.druid.pool.DruidDataSource

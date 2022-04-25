@@ -1,0 +1,37 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: sso-gateway
+  redis:
+    host: 192.168.31.10
+    password: root
+    port: 6379
+    database: 0
+  cloud:
+    nacos:
+      discovery:
+        #server-addr: 192.168.10.4:8848
+        server-addr: 192.168.31.10:8848
+        namespace: public
+    gateway:
+      routes:
+        # 权限
+        - id: clienta_route
+          uri: lb://sso-auth-client-a
+          predicates:
+            - Path=/sso-auth-client-a/**
+          filters:
+            - StripPrefix=1
+        - id: clientb_route
+          uri: lb://sso-auth-client-b
+          predicates:
+            - Path=/sso-auth-client-b/**
+          filters:
+            - StripPrefix=1
+        - id: auth_route
+          uri: lb://sso-auth-server
+          predicates:
+            - Path=/sso-auth-server/**
+          filters:
+            - StripPrefix=1

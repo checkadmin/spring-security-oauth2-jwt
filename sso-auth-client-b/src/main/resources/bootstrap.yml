@@ -1,0 +1,23 @@
+# 应用名称
+server:
+  port: 9002
+spring:
+  application:
+    name: sso-auth-client-b
+  cloud:
+    nacos:
+      discovery:
+        #server-addr: 192.168.10.4:8848
+        server-addr: 192.168.31.10:8848
+        namespace: public
+security:
+  oauth2:
+    client:
+      client-id: c2
+      client-secret: zaxh
+      access-token-uri: http://192.168.56.1:9000/sso-auth-server/oauth/token
+      user-authorization-uri: http://192.168.56.1:9000/sso-auth-server/oauth/authorize
+      registered-redirect-uri: http://192.168.56.1:9000/sso-auth-client-b/login
+    resource:
+      jwt:
+        key-uri: http://192.168.56.1:9000/sso-auth-server/oauth/token_key
